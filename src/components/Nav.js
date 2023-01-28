@@ -1,15 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import Person from '@mui/icons-material/Person';
 
 const Nav = () => (
   <nav className="nav-bar">
     <div className="nav-brand">Bookstore CMS</div>
     <ul className="nav-links">
-      <li><Link to="/">BOOKS</Link></li>
-      <li><Link to="/categories">CATEGORIES</Link></li>
+      <li className="nav-link active"><NavLink to="/">BOOKS</NavLink></li>
+      <li className="nav-link"><NavLink to="/categories">CATEGORIES</NavLink></li>
     </ul>
     <button className="icon-button" type="button">
-      <span className="material-icons">person</span>
+      <span className="material-icons"><Person /></span>
     </button>
   </nav>
 );

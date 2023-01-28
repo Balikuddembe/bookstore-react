@@ -8,8 +8,14 @@ const Inputs = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('');
+  const [error, setError] = useState('');
 
   const postBook = () => {
+    if (!title || !author || !category) {
+      setError('All fields are required.');
+      return;
+    }
+    setError('');
     dispatch(
       createBook(
         {
@@ -34,16 +40,25 @@ const Inputs = () => {
           required
         />
         <input
-          className="input title-input"
+          className="input author-input"
           placeholder="Author"
           value={author}
           type="text"
           onInput={(e) => setAuthor(e.target.value)}
           required
         />
+        <input
+          className="input category-input"
+          placeholder="Category"
+          value={category}
+          type="text"
+          onInput={(e) => setCategory(e.target.value)}
+          required
+        />
+        {error && <p className="error">{error}</p>}
         <button
           className="primary-button-big"
-          type="button"
+          type="submit"
           onClick={() => {
             postBook();
             setAuthor('');
