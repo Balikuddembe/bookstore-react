@@ -1,10 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { getBooks } from '../redux/books/books';
 import Book from './Book';
 import Inputs from './Inputs';
 
 const Books = () => {
-  const books = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
+  const books = useSelector((state) => state.books, shallowEqual);
   return (
     <div className="books-container">
       <ul className="books">
@@ -12,8 +17,9 @@ const Books = () => {
           <Book
             title={book.title}
             author={book.author}
-            id={book.id}
-            key={book.title}
+            category={book.category}
+            id={book.item_id}
+            key={book.item_id}
           />
         ))}
       </ul>
